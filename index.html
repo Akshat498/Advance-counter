@@ -21,83 +21,86 @@
             </div>
             <p id="value" class="text">Previous values</p>
             <p id="previous-values" class="num">0</p>
-        
+
         </div>
     </section>
-   
+
     <section class="flex justify-center items-center min-h-screen ">
         <div class="container">
-                <div class="flex">
-              <input class="input-box" type="text"  id="textInput" placeholder="Enter your text">
-            <button class="subbtn" onclick="saveText()">Submit</button>
+            <div class="flex">
+                <input class="input-box" type="text" id="textInput" placeholder="Enter your text">
+                <button class="subbtn" onclick="saveText()">Submit</button>
             </div>
-              <div class="save-input" id="displayedText"></div>
+            <div class="save-input" id="displayedText"></div>
 
-</div>
-</section>
+        </div>
+    </section>
     <script>
 
         const constValueElement = document.getElementById('const-value');
         const addOneButton = document.getElementById('one-add');
         const saveButton = document.getElementById('save');
         const previousValuesElement = document.getElementById('previous-values');
-        
-        
+
+
         let constValue = 0;
         const previousValues = [];
-        
-        
+
+
         function updateConstValue() {
             constValueElement.textContent = constValue;
         }
-        
-    
+
+
         addOneButton.addEventListener('click', () => {
             constValue++;
             updateConstValue();
         });
-        
-       
+
+
         saveButton.addEventListener('click', () => {
-           if (constValue !== 0) {
-            previousValues.push(constValue);
-            previousValuesElement.textContent = previousValues.join(", ");
-            constValue = 0;
-           document.getElementById("constValue").textContent = constValue;
-           }
+            if (constValue !== 0) {
+                previousValues.push(constValue);
+                previousValuesElement.textContent = previousValues.join(", ");
+                constValue = 0;
+                document.getElementById("constValue").textContent = constValue;
+            }
+            else {
+                alert("Current value must be greater than 0 to save.");
+            }
         });
-        
-     
+
+
         let savedTexts = [];
-        
+
         function saveText() {
             const constText = document.getElementById("textInput").value;
-        
-      
+
+
             savedTexts.push(currentText);
-        
-      
+
+
             const displayText = savedTexts.map((text, index) => `
                         <span>${text} <button onclick="deleteText(${index})">X</button></span>
                     `).join(", ");
             document.getElementById("displayedText").innerHTML = displayText;
-        
-        
+
+
             document.getElementById("textInput").value = "";
         }
-        
+
         function deleteText(index) {
 
             savedTexts.splice(index, 1);
-        
-        
+
+
             const displayText = savedTexts.map((text, index) => `
                         <span>${text} <button onclick="deleteText(${index})">X</button></span>
                     `).join(" ");
             document.getElementById("displayedText").innerHTML = displayText;
         }
-        
-        </script>
+
+    </script>
 </body>
 
 </html>
